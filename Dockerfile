@@ -1,14 +1,14 @@
-# Usamos una imagen de Tomcat compatible con Java
-FROM tomcat:9.0-jdk15-openjdk-slim
+# Usamos Tomcat 10.1 que es el estándar para Jakarta EE
+FROM tomcat:10.1-jdk17-openjdk-slim
 
-# Limpiamos la carpeta de aplicaciones predeterminada de Tomcat
+# Limpiamos la carpeta de aplicaciones de Tomcat
 RUN rm -rf /usr/local/tomcat/webapps/*
 
-# Copiamos tu archivo y lo renombramos a ROOT.war para que sea la página principal
+# Copiamos tu archivo .war y lo renombramos a ROOT para la raíz
 COPY NextStepWeb.war /usr/local/tomcat/webapps/ROOT.war
 
-# Informamos el puerto que usará el contenedor
+# Exponemos el puerto
 EXPOSE 8080
 
-# Comando para iniciar el servidor Tomcat
+# Arrancamos el servidor
 CMD ["catalina.sh", "run"]
